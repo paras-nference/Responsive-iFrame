@@ -13,8 +13,12 @@
         height: 100%;
       }
       .content-div{
-        font-size: 25px;
+        font-size: 40px;
         font-weight: bold;
+        padding-bottom: 20px;
+      }
+      h3 {
+        margin: 5px 0;
       }
       @media only screen and (max-width: 600px) {
         .content {
@@ -41,11 +45,30 @@
           color: white;
         }
       }
-    </style>
+    </style>      
   </head>
   <body>
     <div class="content">
       <div class="content-div">Cluster</div>
+      <div class="content-div1" id="content-div1"></div>
     </div>
+
+    <script>
+      console.log('window.location: ', window.location)
+      const paramsArr = window.location.search.substring(1).split("&");
+      const paramsObj = {};
+      paramsArr.map(param => {
+        paramsObj[param.split("=")[0]] = param.split("=")[1];
+      });
+      if (paramsObj.disable === '1') {
+        let data = '<h3>Parameters:</h3>';
+        Object.keys(paramsObj).map(paramKey => {
+          data += `${paramKey}: ${paramsObj[paramKey]}` + "<br />";
+        });
+        document.querySelector('#content-div1').innerHTML = data;
+      }
+      console.log('paramsObj: ', paramsObj);
+    </script>
+
   </body>
 </html>
